@@ -58359,7 +58359,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Goblins.Array.data[2].goblinPrefab
       value: 
-      objectReference: {fileID: 644133866001740037, guid: e64f510dc5ede7f4a86a2ecf7f9fce0b,
+      objectReference: {fileID: 2620687761408764783, guid: e64f510dc5ede7f4a86a2ecf7f9fce0b,
         type: 3}
     - target: {fileID: 6433207053568697007, guid: adf7efa90cb36ff4a949c837080a1ae8,
         type: 3}
