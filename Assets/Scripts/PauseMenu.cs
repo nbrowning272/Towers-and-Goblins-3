@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuButton1;
     public GameObject pauseMenuButton2;
     public GameObject pauseMenuButton3;
-    public GameObject pauseMenuButton4;
+    //public GameObject pauseMenuButton4;
 
     public bool isPaused;
 
@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuButton1.SetActive(false);
         pauseMenuButton2.SetActive(false);
         pauseMenuButton3.SetActive(false);
-        pauseMenuButton4.SetActive(false);
+        //pauseMenuButton4.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
                 pauseMenuButton1.SetActive(false);
                 pauseMenuButton2.SetActive(false);
                 pauseMenuButton3.SetActive(false);
-                pauseMenuButton4.SetActive(false);
+                //pauseMenuButton4.SetActive(false);
             }
             else
             {
@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
                 pauseMenuButton1.SetActive(true);
                 pauseMenuButton2.SetActive(true);
                 pauseMenuButton3.SetActive(true);
-                pauseMenuButton4.SetActive(true);
+                //pauseMenuButton4.SetActive(true);
             }
         }
     }
