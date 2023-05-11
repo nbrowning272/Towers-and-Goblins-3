@@ -45564,7 +45564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1440378597
 Transform:
   m_ObjectHideFlags: 0
@@ -55262,7 +55262,6 @@ MonoBehaviour:
   pauseMenuButton1: {fileID: 222342998}
   pauseMenuButton2: {fileID: 1056166720}
   pauseMenuButton3: {fileID: 1821966460}
-  pauseMenuButton4: {fileID: 0}
   isPaused: 0
 --- !u!1 &1799052994
 GameObject:
@@ -56058,7 +56057,6 @@ GameObject:
   - component: {fileID: 1821966465}
   - component: {fileID: 1821966464}
   - component: {fileID: 1821966463}
-  - component: {fileID: 1821966462}
   m_Layer: 5
   m_Name: QuitGameButton
   m_TagString: Untagged
@@ -56087,18 +56085,6 @@ RectTransform:
   m_AnchoredPosition: {x: -22, y: -22}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1821966462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821966460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d320ce80f8a9bf546b453b37a6f0a27f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1821966463
 MonoBehaviour:
   m_ObjectHideFlags: 0
