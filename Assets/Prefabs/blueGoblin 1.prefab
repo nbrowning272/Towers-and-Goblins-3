@@ -391,7 +391,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
+  m_Radius: 0.25
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: -0.033235162, z: -0.003532648}
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 1615297966059063183}
   m_Layer: 0
   m_Name: blueGoblin 1
-  m_TagString: Untagged
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
