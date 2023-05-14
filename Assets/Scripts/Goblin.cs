@@ -20,6 +20,8 @@ public class Goblin : MonoBehaviour
     public GameObject playerCam;
     public Upgrade upgrade;
     public bool red = false;
+    
+
     //public TrapControl trapControl;
     //public GameObject shortTrap;
 
@@ -78,7 +80,6 @@ public class Goblin : MonoBehaviour
     {
         GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
         wall = walls[Random.Range(0, walls.Length)].transform;
-
     }
 
     GameObject GetPlayer()
@@ -94,7 +95,8 @@ public class Goblin : MonoBehaviour
 
     private void AttackWall()
     {
-        Quaternion wallDirection = Quaternion.LookRotation(wall.position - transform.position);
+        Vector3 offset = new Vector3(wall.transform.position.x, wall.transform.position.y - 0.65738f, wall.transform.position.z);
+        Quaternion wallDirection = Quaternion.LookRotation(offset - transform.position);
         float wallTime = 0;
         while (wallTime < 1)
         {
