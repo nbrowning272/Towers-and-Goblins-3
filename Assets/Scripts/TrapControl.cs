@@ -11,29 +11,16 @@ public class TrapControl : MonoBehaviour
     public GameObject bulletPrefab;
     public float fireRate, nextFire;
     public bool level1 = false;
-    public float trapTimer = 45;
-    public TrapHealthBar trapBar;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.tag != "Tower")
-        {
-            trapBar.UpdateTrapBar(45, trapTimer);
-        }
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        trapTimer -= Time.deltaTime;
-        if (gameObject.tag != "Tower")
-        {
-            trapBar.UpdateTrapBar(45, trapTimer);
-        }
-        TrapMaintenance();
         targetGoblin = FindClosestGoblin().transform;
         if (level1)
         {
@@ -59,7 +46,6 @@ public class TrapControl : MonoBehaviour
         GameObject clone = Instantiate(bulletPrefab, shootPoint.position, orb.rotation);
         clone.GetComponent<Rigidbody>().AddForce(orb.transform.forward * 5000);
         Destroy(clone, 2);
-        Debug.Log(trapTimer);
     }
     public GameObject FindClosestGoblin()
     {
@@ -85,13 +71,6 @@ public class TrapControl : MonoBehaviour
             }
         }
         return closestGoblin;
-    }
-    public void TrapMaintenance()
-    {
-        if (trapTimer <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
     
 }

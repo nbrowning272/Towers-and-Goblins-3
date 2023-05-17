@@ -14,13 +14,8 @@ public class HUD : MonoBehaviour
     public string wallHealthText;
     public Text wTextElement;
 
-    public string waveHealthText;
-    public Text wHTextElement;
-
     public Player player;
     public GameManager gameManager;
-    public EnemySpawner enemySpawner;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -39,16 +34,5 @@ public class HUD : MonoBehaviour
 
         wallHealthText = "Wall Health: " + gameManager.wallHealth + "/" + gameManager.maxWallHealth;
         wTextElement.text = wallHealthText;
-
-        if (enemySpawner.waitTimer == (10 + (enemySpawner.currentWave * 2.5f)))
-        {
-            waveHealthText = "Wave: " + enemySpawner.currentWave;
-            wHTextElement.text = waveHealthText;
-        }
-        else
-        {
-            waveHealthText = "Grace Period: \n" + enemySpawner.waitTimer.ToString("F2") + " Seconds Remaining";
-            wHTextElement.text = waveHealthText;
-        }
     }
 }

@@ -740,7 +740,7 @@ MonoBehaviour:
   managerObject: {fileID: 0}
   playerCam: {fileID: 0}
   upgrade: {fileID: 0}
-  red: 1
+  red: 0
 --- !u!114 &3851303510179575261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,7 +757,7 @@ MonoBehaviour:
   angle: 60
   height: 3
   meshColor: {r: 1, g: 0, b: 0, a: 1}
-  checkFrequency: 100
+  checkFrequency: 5
   layers:
     serializedVersion: 2
     m_Bits: 0
