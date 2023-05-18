@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     private float waveTimer;
     private float spawnInterval;
     private float spawnTimer;
-    private float waitTimer = 10;
+    public float waitTimer = 12.5f;
     public GameObject blueGoblin;
     
 
@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
                             currentWave++;
                             waveDuration = 60;
                             GenerateWave();
-                             waitTimer = 10;
+                            waitTimer = 10 + (currentWave * 2.5f);
                         }
                     }
             }
@@ -82,21 +82,33 @@ public class EnemySpawner : MonoBehaviour
         // if it does, add it to the list, and deduct the cost from the overall value of the wave
         // once there is no space left exit the loop
         List<GameObject> generatedGoblins = new List<GameObject>();
-        while (waveValue > 0)
+        //while (waveValue > 0)
+        //{
+        //    int randGoblinId = Random.Range(0, Goblins.Count);
+        //    int randGoblinCost = Goblins[randGoblinId].cost;
+
+        //    if (waveValue - randGoblinCost >= 0)
+        //    {
+        //        generatedGoblins.Add(Goblins[randGoblinId].goblinPrefab);
+        //        waveValue -= randGoblinCost;
+        //    }
+        //    else if (waveValue <= 0)
+        //    {
+        //        break;
+        //    }
+
+        //}
+        int goblinCost = 0;
+        for (int i = waveValue; i > 0; i -= goblinCost)
         {
             int randGoblinId = Random.Range(0, Goblins.Count);
             int randGoblinCost = Goblins[randGoblinId].cost;
-
             if (waveValue - randGoblinCost >= 0)
             {
                 generatedGoblins.Add(Goblins[randGoblinId].goblinPrefab);
                 waveValue -= randGoblinCost;
+                goblinCost = randGoblinCost;
             }
-            else if (waveValue <= 0)
-            {
-                break;
-            }
-
         }
         goblinsToSpawn.Clear();
         goblinsToSpawn = generatedGoblins;

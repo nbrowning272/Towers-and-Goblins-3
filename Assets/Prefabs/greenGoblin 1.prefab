@@ -1459,7 +1459,7 @@ MonoBehaviour:
   angle: 60
   height: 3
   meshColor: {r: 1, g: 0, b: 0, a: 1}
-  checkFrequency: 5
+  checkFrequency: 100
   layers:
     serializedVersion: 2
     m_Bits: 0

@@ -24,7 +24,7 @@ public class Upgrade : MonoBehaviour
     public RangedTrap rangedTrap;
     public GameObject towerObject;
     public TrapControl towerControl;
-
+    public float trapMaintenanceCost = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +100,25 @@ public class Upgrade : MonoBehaviour
             {
                 towerStation.tText = "";
             }
+            if (hit.collider.gameObject.tag == "Trap1" || hit.collider.gameObject.tag == "RangedTrap")
+            {
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > trapMaintenanceCost)
+                {
+                    if (hit.collider.gameObject.tag == "Trap1")
+                    {
+                        trapMaintenanceCost = 5;
+                    }
+                    if (hit.collider.gameObject.tag == "RangedTrap")
+                    {
+                        trapMaintenanceCost = 7;
+                    }
+                    gameManager.salvage -= trapMaintenanceCost;
+                    GameObject trapM = hit.transform.gameObject;
+                    TrapControl trapControl = trapM.GetComponent<TrapControl>();
+                    trapControl.trapTimer = 45;
+                    Debug.Log(trapControl.trapTimer);
+                }
+            }
         }
     }
     public void SwordCost()
@@ -162,6 +181,10 @@ public class Upgrade : MonoBehaviour
             towerCostText = "Maxed Out";
             towerCost = 1000;
         }
+    }
+    public void TrapMaintenanceCost()
+    {
+
     }
 }
 
