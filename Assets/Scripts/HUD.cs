@@ -17,6 +17,9 @@ public class HUD : MonoBehaviour
     public string waveHealthText;
     public Text wHTextElement;
 
+    public string instructionText;
+    public Text iTextElement;
+
     public Player player;
     public GameManager gameManager;
     public EnemySpawner enemySpawner;
@@ -50,5 +53,7 @@ public class HUD : MonoBehaviour
             waveHealthText = "Grace Period: \n" + enemySpawner.waitTimer.ToString("F2") + " Seconds Remaining";
             wHTextElement.text = waveHealthText;
         }
+
+        iTextElement.text = instructionText;
     }
 }

@@ -31,6 +31,7 @@ public class Upgrade : MonoBehaviour
         placeObject = GetComponent<PlaceObject>();
         rangedTrap = GetComponent<RangedTrap>();
         towerControl = towerObject.GetComponent<TrapControl>();
+        
     }
 
     // Update is called once per frame
@@ -102,6 +103,10 @@ public class Upgrade : MonoBehaviour
             }
             if (hit.collider.gameObject.tag == "Trap1" || hit.collider.gameObject.tag == "RangedTrap")
             {
+                GameObject trapM = hit.transform.gameObject;
+                Transform HealthBarT = trapM.transform.Find("HealthBar");
+                GameObject HealthBar = HealthBarT.gameObject;
+                HealthBar.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > trapMaintenanceCost)
                 {
                     if (hit.collider.gameObject.tag == "Trap1")
@@ -113,11 +118,30 @@ public class Upgrade : MonoBehaviour
                         trapMaintenanceCost = 7;
                     }
                     gameManager.salvage -= trapMaintenanceCost;
-                    GameObject trapM = hit.transform.gameObject;
+                    
                     TrapControl trapControl = trapM.GetComponent<TrapControl>();
                     trapControl.trapTimer = 45;
                     Debug.Log(trapControl.trapTimer);
+
                 }
+            }
+            if (hit.collider.gameObject.tag != "Trap1" && hit.collider.gameObject.tag != "RangedTrap")
+            {
+                GameObject[] lightningTraps = GameObject.FindGameObjectsWithTag("Trap1");
+                GameObject[] rangedTraps = GameObject.FindGameObjectsWithTag("RangedTrap");
+                foreach (GameObject lightningTrap in lightningTraps)
+                {
+                    Transform HealthBarT = lightningTrap.transform.Find("HealthBar");
+                    GameObject HealthBar = HealthBarT.gameObject;
+                    HealthBar.SetActive(false);
+                }
+                foreach (GameObject rangedTrap in rangedTraps)
+                {
+                    Transform HealthBarT = rangedTrap.transform.Find("HealthBar");
+                    GameObject HealthBar = HealthBarT.gameObject;
+                    HealthBar.SetActive(false);
+                }
+
             }
         }
     }
