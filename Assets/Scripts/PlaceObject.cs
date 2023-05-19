@@ -51,6 +51,7 @@ public class PlaceObject : MonoBehaviour
     {
         if (traps > 0)
         {
+            trapInstruction = false;
             if (trapInstruction == false)
             {
                 hud.instructionText = "1 - Lightning Trap\n2- Ranged Trap";
@@ -75,6 +76,14 @@ public class PlaceObject : MonoBehaviour
                 return true;
             }
             
+        }
+        else if (traps < 1 && rangedTrap.traps < 1)
+        {
+            ghostTrap = false;
+            ghostObject.SetActive(false);
+            trapInstruction = true;
+            hud.instructionText = "";
+            return false;
         }
         else
         {
