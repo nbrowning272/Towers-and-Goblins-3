@@ -9,6 +9,10 @@ public class RangedTrap : MonoBehaviour
     public int traps = 0;
     public bool ghostTrap = false;
     public PlaceObject placeObject;
+    public HUD hud;
+    public bool trapInstruction;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +50,15 @@ public class RangedTrap : MonoBehaviour
     {
         if (traps > 0)
         {
+            trapInstruction = false;
+            if (trapInstruction == false)
+            {
+                hud.instructionText = "1 - Lightning Trap\n2- Ranged Trap";
+            }
             if (Input.GetKeyDown(KeyCode.Alpha2) && ghostTrap == false && placeObject.ghostTrap == false)
             {
+                trapInstruction = true;
+                hud.instructionText = "LMB - Place Trap";
                 ghostObject.SetActive(true);
                 ghostTrap = true;
                 return true;
@@ -64,6 +75,14 @@ public class RangedTrap : MonoBehaviour
                 return true;
             }
 
+        }
+        else if (traps < 1 && placeObject.traps < 1)
+        {
+            ghostTrap = false;
+            ghostObject.SetActive(false);
+            trapInstruction = true;
+            hud.instructionText = "";
+            return false;
         }
         else
         {

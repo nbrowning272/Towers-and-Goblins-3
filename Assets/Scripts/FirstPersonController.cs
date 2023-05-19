@@ -285,8 +285,8 @@ namespace StarterAssets
 			}
 			else
 			{
-				MoveSpeed = 4f;
-				SprintSpeed = 6.0f;
+				MoveSpeed = 6f;
+				SprintSpeed = 8f;
 				//Debug.Log(MoveSpeed);
 				//Debug.Log(SprintSpeed);
 			}
