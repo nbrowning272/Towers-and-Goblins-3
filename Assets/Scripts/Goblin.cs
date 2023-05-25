@@ -20,6 +20,7 @@ public class Goblin : MonoBehaviour
     public GameObject playerCam;
     public Upgrade upgrade;
     public bool red = false;
+    public bool boss = false;
     
 
     //public TrapControl trapControl;
@@ -88,7 +89,7 @@ public class Goblin : MonoBehaviour
         {
             return lineOfSight.Objects[0];
         }
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player");
         return null;
 
     }
@@ -109,6 +110,7 @@ public class Goblin : MonoBehaviour
         Quaternion playerDirection = Quaternion.LookRotation(player.transform.position - transform.position);
         float time = 0;
         while (time < 1)
+        //if (time < 1)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, playerDirection, time);
             time += Time.deltaTime * rotateSpeed;
@@ -134,7 +136,7 @@ public class Goblin : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Wall"))
         {
-            if (!red)
+            if (!red && !boss)
             {
                 Debug.Log(gameManager.wallHealth);
                 gameManager.wallHealth--;
@@ -144,6 +146,11 @@ public class Goblin : MonoBehaviour
             {
                 Debug.Log(gameManager.wallHealth);
                 gameManager.wallHealth-= 3;
+                Destroy(gameObject);
+            }
+            else if (boss)
+            {
+                gameManager.wallHealth -= 5;
                 Destroy(gameObject);
             }
         }

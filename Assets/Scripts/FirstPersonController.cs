@@ -273,9 +273,9 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-		void OnTriggerStay(Collider other)
+		void OnTriggerEnter(Collider other)
 		{
-			if (other.tag == "Mud")
+			if (other.gameObject.tag == "Mud")
 			{
 				MoveSpeed = 2f;
 				SprintSpeed = 4f;
@@ -283,13 +283,22 @@ namespace StarterAssets
 				//Debug.Log(MoveSpeed);
 				//Debug.Log(SprintSpeed);
 			}
-			else
-			{
+			//else
+			//{
+			//	MoveSpeed = 6f;
+			//	SprintSpeed = 8f;
+			//	//Debug.Log(MoveSpeed);
+			//	//Debug.Log(SprintSpeed);
+			//}
+		}
+        private void OnTriggerExit(Collider other)
+        {
+			if (other.gameObject.tag == "Mud")
+            {
 				MoveSpeed = 6f;
 				SprintSpeed = 8f;
-				//Debug.Log(MoveSpeed);
-				//Debug.Log(SprintSpeed);
 			}
+
 		}
-	}
+    }
 }

@@ -16,7 +16,7 @@ public class TrapControl : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         if (gameObject.tag != "Tower")
         {
@@ -26,7 +26,7 @@ public class TrapControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         trapTimer -= Time.deltaTime;
         if (gameObject.tag != "Tower")
