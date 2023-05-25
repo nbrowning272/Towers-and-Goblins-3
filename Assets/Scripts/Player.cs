@@ -24,11 +24,11 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Goblin"))
         {
             Goblin goblin = other.gameObject.GetComponent<Goblin>();
-            if (!goblin.red)
+            if (!goblin.red && !goblin.boss)
             {
                 health--;
                 Debug.Log(health);
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
                 if (health <= 0)
                 {
                     Destroy(gameObject);
@@ -38,7 +38,15 @@ public class Player : MonoBehaviour
             {
                 health-= 3;
                 Debug.Log(health);
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
+                if (health <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else if (goblin.boss)
+            {
+                health -= 5;
                 if (health <= 0)
                 {
                     Destroy(gameObject);

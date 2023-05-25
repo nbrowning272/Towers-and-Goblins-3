@@ -14,7 +14,7 @@ public class PlaceObject : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         Instantiate(ghostObject, new Vector3(14.8f, 12f, 1156f), Quaternion.Euler(0, 0, 0));
         ghostObject = GameObject.FindWithTag("Ghost Trap");
@@ -23,7 +23,7 @@ public class PlaceObject : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         RaycastHit hit;
         if (CheckForTraps())
@@ -47,21 +47,24 @@ public class PlaceObject : MonoBehaviour
         }           
     }
 
-    public bool CheckForTraps()
+    public virtual bool CheckForTraps()
     {
         if (traps > 0)
         {
-            trapInstruction = false;
-            if (trapInstruction == false)
-            {
-                hud.instructionText = "1 - Lightning Trap\n2- Ranged Trap";
-            }
+            //trapInstruction = false;
+            //if (trapInstruction == false)
+            //{
+            //    hud.instructionText = "1 - Lightning Trap\n2- Ranged Trap";
+            //}
             if (Input.GetKeyDown(KeyCode.Alpha1) && ghostTrap == false && rangedTrap.ghostTrap == false)
             {
-                trapInstruction = true;
-                hud.instructionText = "LMB - Place Trap";
                 ghostObject.SetActive(true);
                 ghostTrap = true;
+                //trapInstruction = true;
+                //if (trapInstruction == true)
+                //{
+                //    hud.instructionText = "LMB - Place Trap";
+                //}
                 return true;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha1) && ghostTrap == true && rangedTrap.ghostTrap == false)
@@ -77,14 +80,14 @@ public class PlaceObject : MonoBehaviour
             }
             
         }
-        else if (traps < 1 && rangedTrap.traps < 1)
-        {
-            ghostTrap = false;
-            ghostObject.SetActive(false);
-            trapInstruction = true;
-            hud.instructionText = "";
-            return false;
-        }
+        //else if (traps < 1 && rangedTrap.traps < 1)
+        //{
+        //    ghostTrap = false;
+        //    ghostObject.SetActive(false);
+        //    trapInstruction = true;
+        //    hud.instructionText = "";
+        //    return false;
+        //}
         else
         {
             ghostTrap = false;

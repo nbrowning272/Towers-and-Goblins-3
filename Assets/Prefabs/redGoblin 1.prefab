@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 649400018445222306}
   m_Layer: 0
   m_Name: redGoblin 1
-  m_TagString: Untagged
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -741,6 +741,7 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   upgrade: {fileID: 0}
   red: 1
+  boss: 0
 --- !u!114 &3851303510179575261
 MonoBehaviour:
   m_ObjectHideFlags: 0

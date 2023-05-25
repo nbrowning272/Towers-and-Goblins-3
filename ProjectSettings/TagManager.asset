@@ -3,7 +3,31 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Mud
+  - Plane
+  - WeaponStation
+  - Wall
+  - Portal2
+  - WallStation
+  - Portal1
+  - GameManager
+  - Ghost Trap
+  - Trap1
+  - GhostRangedTrap
+  - RangedTrap
+  - Bullet
+  - LongBullet
+  - CinemachineTarget
+  - Sword
+  - Goblin
+  - Tower
+  - Anvil
+  - BuyLightning
+  - BuyRanged
+  - Bomb Trap
+  - Ghost Bomb Trap
+  - BuyBomb
   layers:
   - Default
   - TransparentFX
