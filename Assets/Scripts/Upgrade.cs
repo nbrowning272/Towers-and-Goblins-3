@@ -87,7 +87,7 @@ public class Upgrade : MonoBehaviour
                 SwordCost();
                 hud.interactText = "E - Upgrade Sword - " + swordCostText;
                 
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > swordCost)
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= swordCost)
                 {
                     gameManager.salvage -= swordCost;
                     swordLevel++;
@@ -98,7 +98,7 @@ public class Upgrade : MonoBehaviour
             if (hit.collider.gameObject.tag == "BuyLightning")
             {
                 hud.interactText = "E - Buy Lightning Trap - " + lightningTrapCost + " Salvage";
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > lightningTrapCost)
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= lightningTrapCost)
                 {
                     gameManager.salvage -= lightningTrapCost;
                     placeObject.traps++;
@@ -109,7 +109,7 @@ public class Upgrade : MonoBehaviour
             if (hit.collider.gameObject.tag == "BuyRanged")
             {
                 hud.interactText = "E - Buy Ranged Trap - " + rangedTrapCost + " Salvage";
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > rangedTrapCost)
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= rangedTrapCost)
                 {
                     gameManager.salvage -= rangedTrapCost;
                     rangedTrap.traps++;
@@ -120,7 +120,7 @@ public class Upgrade : MonoBehaviour
             if (hit.collider.gameObject.tag == "BuyBomb")
             {
                 hud.interactText = "E - Buy Bomb Trap - " + bombTrapCost + " Salvage";
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > bombTrapCost)
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= bombTrapCost)
                 {
                     gameManager.salvage -= bombTrapCost;
                     bombTrap.traps++;
@@ -132,7 +132,7 @@ public class Upgrade : MonoBehaviour
             {
                 WallCost();
                 hud.interactText = "E - Upgrade Wall - " + wallCost + " Salvage";
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > wallCost)
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= wallCost)
                 {
                     gameManager.salvage -= wallCost;
                     gameManager.wallHealth *= 1.5f;
@@ -148,7 +148,7 @@ public class Upgrade : MonoBehaviour
             {
                 TowerCost();
                 hud.interactText = "E - Upgrade Tower - " + towerCost + " Salvage";
-                if (Input.GetKeyDown(KeyCode.Y) && gameManager.salvage > towerCost)
+                if (Input.GetKeyDown(KeyCode.Y) && gameManager.salvage >= towerCost)
                 {
                     gameManager.salvage -= towerCost;
                     towerControl.fireRate += 0.25f;
@@ -163,7 +163,7 @@ public class Upgrade : MonoBehaviour
                 Transform HealthBarT = trapM.transform.Find("HealthBar");
                 GameObject HealthBar = HealthBarT.gameObject;
                 HealthBar.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > trapMaintenanceCost)
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= trapMaintenanceCost)
                 {
                     if (hit.collider.gameObject.tag == "Trap1")
                     {
