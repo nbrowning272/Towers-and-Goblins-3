@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 4391934316905023018}
   - component: {fileID: 3684552756642423260}
   - component: {fileID: 3510867663789443369}
+  - component: {fileID: 2393067063015856727}
   m_Layer: 0
   m_Name: blade
   m_TagString: Goblin
@@ -530,6 +531,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &2393067063015856727
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590768144742198246}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4017531923558724013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,9 +1391,10 @@ GameObject:
   - component: {fileID: 4115323075678561424}
   - component: {fileID: -3531559950754652859}
   - component: {fileID: -602951782182085504}
+  - component: {fileID: 6549581001455571268}
   m_Layer: 0
   m_Name: greenGoblin 1
-  m_TagString: Untagged
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1427,6 +1445,7 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   upgrade: {fileID: 0}
   red: 0
+  boss: 0
 --- !u!54 &-3531559950754652859
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1466,6 +1485,26 @@ MonoBehaviour:
   occlusionLayers:
     serializedVersion: 2
     m_Bits: 1
+--- !u!95 &6549581001455571268
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334547633512404305}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b89d986c0b9248948a4ccda0546f2c7b, type: 3}
+  m_Controller: {fileID: 9100000, guid: 35fbda0fe83169642a626e6255752b63, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9012050791416468663
 GameObject:
   m_ObjectHideFlags: 0

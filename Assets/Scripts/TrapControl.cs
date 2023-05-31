@@ -16,17 +16,18 @@ public class TrapControl : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         if (gameObject.tag != "Tower")
         {
             trapBar.UpdateTrapBar(45, trapTimer);
         }
+        else level1 = true;
         
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         trapTimer -= Time.deltaTime;
         if (gameObject.tag != "Tower")
@@ -88,7 +89,7 @@ public class TrapControl : MonoBehaviour
     }
     public void TrapMaintenance()
     {
-        if (trapTimer <= 0)
+        if (trapTimer <= 0 && gameObject.tag != "Tower")
         {
             Destroy(gameObject);
         }

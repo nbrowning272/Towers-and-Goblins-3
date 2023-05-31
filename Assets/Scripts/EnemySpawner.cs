@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
     public float waitTimer = 12.5f;
     public GameObject blueGoblin;
+    public GameObject bossGoblin;
+    public bool bossSpawned = false;
     
 
     void Start()
@@ -42,13 +44,17 @@ public class EnemySpawner : MonoBehaviour
                 else
                 {
                     waveTimer = 0; // If list of goblins is exhausted set wave timer to zero
-                    if (waveTimer <= 0 && currentWave < 5 && GameObject.FindGameObjectsWithTag("Goblin").Length == 1)
+                    if (waveTimer <= 0 && GameObject.FindGameObjectsWithTag("Goblin").Length == 1)
                     {
                         waitTimer = waitTimer -= Time.deltaTime;
                         if (waitTimer <= 0)
                         {
                             currentWave++;
                             waveDuration = 60;
+                            if (currentWave > 4 && currentWave % 5 == 0)
+                        {
+                            Instantiate(bossGoblin, Spawners[randSpawner].position, Quaternion.identity);
+                        }
                             GenerateWave();
                             waitTimer = 10 + (currentWave * 2.5f);
                         }

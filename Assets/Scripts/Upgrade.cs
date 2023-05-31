@@ -5,72 +5,135 @@ using UnityEngine.UI;
 
 public class Upgrade : MonoBehaviour
 {
+    [Header("Station Scripts")]
     public WeaponStation weaponStation;
     public WallStation wallStation;
     public TowerStation towerStation;
+
+    [Header("Sword")] 
     public int swordLevel = 1;
     public float swordCost;
     public string swordCostText;
+    public float swordDamage = 1;
+
+    [Header("Wall")]
     public int wallLevel = 1;
     public float wallCost;
     public string wallCostText;
+
+    [Header("Tower")]
     public int towerLevel = 1;
     public float towerCost;
     public string towerCostText;
-    public GameManager gameManager;
-    public float lightningTrapCost = 15;
-    public float rangedTrapCost = 20;
-    public PlaceObject placeObject;
-    public RangedTrap rangedTrap;
     public GameObject towerObject;
     public TrapControl towerControl;
+
+
+    
+
+    [Header("Traps")]
+    public float lightningTrapCost = 15;
+    public float rangedTrapCost = 20;
+    public float bombTrapCost = 15;
+    public PlaceObject placeObject;
+    public RangedTrap rangedTrap;
+    public BombTrap bombTrap;
     public float trapMaintenanceCost = 5f;
+
+    [Header("Others")]
+    public GameManager gameManager;
+    public HUD hud;
     // Start is called before the first frame update
     void Start()
     {
         placeObject = GetComponent<PlaceObject>();
         rangedTrap = GetComponent<RangedTrap>();
+        bombTrap = GetComponent<BombTrap>();
         towerControl = towerObject.GetComponent<TrapControl>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        WallCost();
-        SwordCost();
-        TowerCost();
+        
+        
+        
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
         {
-            if (hit.collider.gameObject.tag == "WeaponStation")
+            hud.interactText = "";
+
+            if (hit.collider.gameObject.tag != "Trap1" && hit.collider.gameObject.tag != "RangedTrap")
             {
-                //WEAPON STATION
-                weaponStation.wText = "U: Upgrade Sword - " + swordCostText + "\nJ: Buy Lightning Trap - 15 Salvage \nN: Buy Ranged Lightning Trap - 20 Salvage";// \nB: Bomb Trap - 10 Salvage";
-                if (Input.GetKeyDown(KeyCode.U) && gameManager.salvage > swordCost){
+                GameObject[] lightningTraps = GameObject.FindGameObjectsWithTag("Trap1");
+                GameObject[] rangedTraps = GameObject.FindGameObjectsWithTag("RangedTrap");
+                foreach (GameObject lightningTrap in lightningTraps)
+                {
+                    Transform HealthBarT = lightningTrap.transform.Find("HealthBar");
+                    GameObject HealthBar = HealthBarT.gameObject;
+                    HealthBar.SetActive(false);
+                }
+                foreach (GameObject rangedTrap in rangedTraps)
+                {
+                    Transform HealthBarT = rangedTrap.transform.Find("HealthBar");
+                    GameObject HealthBar = HealthBarT.gameObject;
+                    HealthBar.SetActive(false);
+                }
+            }
+
+            //ANVIL
+            if (hit.collider.gameObject.tag == "Anvil")
+            {
+                SwordCost();
+                hud.interactText = "E - Upgrade Sword - " + swordCostText;
+                
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= swordCost)
+                {
                     gameManager.salvage -= swordCost;
                     swordLevel++;
                 }
-                if (Input.GetKeyDown(KeyCode.J) && gameManager.salvage > lightningTrapCost)
+            }
+
+            // LIGHTNING TRAPS
+            if (hit.collider.gameObject.tag == "BuyLightning")
+            {
+                hud.interactText = "E - Buy Lightning Trap - " + lightningTrapCost + " Salvage";
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= lightningTrapCost)
                 {
                     gameManager.salvage -= lightningTrapCost;
                     placeObject.traps++;
                 }
-                if (Input.GetKeyDown(KeyCode.N) && gameManager.salvage > lightningTrapCost)
+            }
+
+            // RANGED TRAPS
+            if (hit.collider.gameObject.tag == "BuyRanged")
+            {
+                hud.interactText = "E - Buy Ranged Trap - " + rangedTrapCost + " Salvage";
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= rangedTrapCost)
                 {
-                    gameManager.salvage -= lightningTrapCost;
+                    gameManager.salvage -= rangedTrapCost;
                     rangedTrap.traps++;
                 }
             }
-            if (hit.collider.gameObject.tag != "WeaponStation")
+
+            // BOMB TRAPS
+            if (hit.collider.gameObject.tag == "BuyBomb")
             {
-                weaponStation.wText = "";
+                hud.interactText = "E - Buy Bomb Trap - " + bombTrapCost + " Salvage";
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= bombTrapCost)
+                {
+                    gameManager.salvage -= bombTrapCost;
+                    bombTrap.traps++;
+                }
             }
 
             // WALL
             if (hit.collider.gameObject.tag == "WallStation")
             {
-                wallStation.wText = "H: Upgrade Wall - " + wallCostText;
-                if (Input.GetKeyDown(KeyCode.H) && gameManager.salvage > wallCost)
+                WallCost();
+                hud.interactText = "E - Upgrade Wall - " + wallCost + " Salvage";
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= wallCost)
                 {
                     gameManager.salvage -= wallCost;
                     gameManager.wallHealth *= 1.5f;
@@ -80,29 +143,28 @@ public class Upgrade : MonoBehaviour
                     wallLevel++;
                 }
             }
-            if (hit.collider.gameObject.tag != "WallStation")
-            {
-                wallStation.wText = "";
-            }
 
             // TOWER
             if (hit.collider.gameObject.tag == "Tower")
             {
-                towerStation.tText = "Y: Upgrade Tower - " + towerCostText;
-                if (Input.GetKeyDown(KeyCode.Y) && gameManager.salvage > towerCost)
+                TowerCost();
+                hud.interactText = "E - Upgrade Tower - " + towerCost + " Salvage";
+                if (Input.GetKeyDown(KeyCode.Y) && gameManager.salvage >= towerCost)
                 {
                     gameManager.salvage -= towerCost;
                     towerControl.fireRate += 0.25f;
                     towerLevel++;
                 }
             }
-            if (hit.collider.gameObject.tag != "Tower")
-            {
-                towerStation.tText = "";
-            }
+
+            // TRAP MAINTENANCE
             if (hit.collider.gameObject.tag == "Trap1" || hit.collider.gameObject.tag == "RangedTrap")
             {
-                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > trapMaintenanceCost)
+                GameObject trapM = hit.transform.gameObject;
+                Transform HealthBarT = trapM.transform.Find("HealthBar");
+                GameObject HealthBar = HealthBarT.gameObject;
+                HealthBar.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= trapMaintenanceCost)
                 {
                     if (hit.collider.gameObject.tag == "Trap1")
                     {
@@ -113,12 +175,16 @@ public class Upgrade : MonoBehaviour
                         trapMaintenanceCost = 7;
                     }
                     gameManager.salvage -= trapMaintenanceCost;
-                    GameObject trapM = hit.transform.gameObject;
+
                     TrapControl trapControl = trapM.GetComponent<TrapControl>();
                     trapControl.trapTimer = 45;
                     Debug.Log(trapControl.trapTimer);
+
                 }
             }
+            
+
+                
         }
     }
     public void SwordCost()
@@ -127,16 +193,19 @@ public class Upgrade : MonoBehaviour
         {
             swordCostText = "30 Salvage";
             swordCost = 30;
+            swordDamage = 1;
         }
         if (swordLevel == 2)
         {
             swordCostText = "50 Salvage";
             swordCost = 50;
+            swordDamage = 2;
         }
         if (swordLevel == 3)
         {
             swordCostText = "Maxed Out";
             swordCost = 1000;
+            swordDamage = 3;
         }
     }
     public void WallCost()
@@ -184,7 +253,90 @@ public class Upgrade : MonoBehaviour
     }
     public void TrapMaintenanceCost()
     {
+        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
+        //{
+        //    if (hit.collider.gameObject.tag == "WeaponStation")
+        //    {
+        //        //WEAPON STATION
+        //        weaponStation.wText = "U: Upgrade Sword - " + swordCostText + "\nJ: Buy Lightning Trap - 15 Salvage \nN: Buy Ranged Lightning Trap - 20 Salvage";// \nB: Bomb Trap - 10 Salvage";
+        //        if (Input.GetKeyDown(KeyCode.U) && gameManager.salvage > swordCost){
+        //            gameManager.salvage -= swordCost;
+        //            swordLevel++;
+        //        }
+        //        if (Input.GetKeyDown(KeyCode.J) && gameManager.salvage > lightningTrapCost)
+        //        {
+        //            gameManager.salvage -= lightningTrapCost;
+        //            placeObject.traps++;
+        //        }
+        //        if (Input.GetKeyDown(KeyCode.N) && gameManager.salvage > lightningTrapCost)
+        //        {
+        //            gameManager.salvage -= lightningTrapCost;
+        //            rangedTrap.traps++;
+        //        }
+        //    }
+        //    if (hit.collider.gameObject.tag != "WeaponStation")
+        //    {
+        //        weaponStation.wText = "";
+        //    }
 
+        //    // WALL
+        //    if (hit.collider.gameObject.tag == "WallStation")
+        //    {
+        //        wallStation.wText = "H: Upgrade Wall - " + wallCostText;
+        //        if (Input.GetKeyDown(KeyCode.H) && gameManager.salvage > wallCost)
+        //        {
+        //            gameManager.salvage -= wallCost;
+        //            gameManager.wallHealth *= 1.5f;
+        //            gameManager.wallHealth = Mathf.Ceil(gameManager.wallHealth);
+        //            gameManager.maxWallHealth *= 1.5f;
+        //            gameManager.maxWallHealth = Mathf.Ceil(gameManager.maxWallHealth);
+        //            wallLevel++;
+        //        }
+        //    }
+        //    if (hit.collider.gameObject.tag != "WallStation")
+        //    {
+        //        wallStation.wText = "";
+        //    }
+
+        //    // TOWER
+        //    if (hit.collider.gameObject.tag == "Tower")
+        //    {
+        //        towerStation.tText = "Y: Upgrade Tower - " + towerCostText;
+        //        if (Input.GetKeyDown(KeyCode.Y) && gameManager.salvage > towerCost)
+        //        {
+        //            gameManager.salvage -= towerCost;
+        //            towerControl.fireRate += 0.25f;
+        //            towerLevel++;
+        //        }
+        //    }
+        //    if (hit.collider.gameObject.tag != "Tower")
+        //    {
+        //        towerStation.tText = "";
+        //    }
+        //    if (hit.collider.gameObject.tag == "Trap1" || hit.collider.gameObject.tag == "RangedTrap")
+        //    {
+        //        GameObject trapM = hit.transform.gameObject;
+        //        Transform HealthBarT = trapM.transform.Find("HealthBar");
+        //        GameObject HealthBar = HealthBarT.gameObject;
+        //        HealthBar.SetActive(true);
+        //        if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage > trapMaintenanceCost)
+        //        {
+        //            if (hit.collider.gameObject.tag == "Trap1")
+        //            {
+        //                trapMaintenanceCost = 5;
+        //            }
+        //            if (hit.collider.gameObject.tag == "RangedTrap")
+        //            {
+        //                trapMaintenanceCost = 7;
+        //            }
+        //            gameManager.salvage -= trapMaintenanceCost;
+
+        //            TrapControl trapControl = trapM.GetComponent<TrapControl>();
+        //            trapControl.trapTimer = 45;
+        //            Debug.Log(trapControl.trapTimer);
+
+        //        }
+        //    }
     }
 }
 

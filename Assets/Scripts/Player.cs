@@ -10,42 +10,16 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         Cursor.visible = false;
-
-    }
-    public void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Goblin"))
-        {
-            Goblin goblin = other.gameObject.GetComponent<Goblin>();
-            if (!goblin.red)
-            {
-                health--;
-                Debug.Log(health);
-                Destroy(other.gameObject);
-                if (health <= 0)
-                {
-                    Destroy(gameObject);
-                }
-            }
-            else if (goblin.red)
-            {
-                health-= 3;
-                Debug.Log(health);
-                Destroy(other.gameObject);
-                if (health <= 0)
-                {
-                    Destroy(gameObject);
-                }
-            }
-            
-        }
 
     }
 }
