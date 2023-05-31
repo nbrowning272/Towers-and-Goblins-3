@@ -1,11 +1,35 @@
 fileFormatVersion: 2
-guid: 593579642b4febd42b46d47f0e57271f
+guid: bd6662feb3f7e0d4fbac016c885e90b6
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -203655887218126122
-    second: mixamo.com
+      74: 2449926736793008914
+    second: CharacterArmature|Consumable_Drink.001
+  - first:
+      74: 6160728808213848692
+    second: CharacterArmature|Fists_Block
+  - first:
+      74: 230734795802728137
+    second: CharacterArmature|Fists_Idle
+  - first:
+      74: -6630150197971251076
+    second: CharacterArmature|Lefthand_Spell1
+  - first:
+      74: 7070147259824609170
+    second: CharacterArmature|Sword_Block
+  - first:
+      74: -6235347698650002986
+    second: CharacterArmature|Sword_Idle
+  - first:
+      74: -6373834565392726941
+    second: CharacterArmature|Sword_Slash1
+  - first:
+      74: 3604062340224630881
+    second: CharacterArmature|Sword_Slash2
+  - first:
+      74: -8416505759695958556
+    second: CharacterArmature|Sword_Walk
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -34,36 +58,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: mixamo.com
-      takeName: mixamo.com
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 111
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -129,7 +124,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0

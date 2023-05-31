@@ -14,6 +14,7 @@ public class Upgrade : MonoBehaviour
     public int swordLevel = 1;
     public float swordCost;
     public string swordCostText;
+    public float swordDamage = 1;
 
     [Header("Wall")]
     public int wallLevel = 1;
@@ -192,16 +193,19 @@ public class Upgrade : MonoBehaviour
         {
             swordCostText = "30 Salvage";
             swordCost = 30;
+            swordDamage = 1;
         }
         if (swordLevel == 2)
         {
             swordCostText = "50 Salvage";
             swordCost = 50;
+            swordDamage = 2;
         }
         if (swordLevel == 3)
         {
             swordCostText = "Maxed Out";
             swordCost = 1000;
+            swordDamage = 3;
         }
     }
     public void WallCost()
