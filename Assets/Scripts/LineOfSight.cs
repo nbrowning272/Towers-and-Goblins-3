@@ -39,11 +39,12 @@ public class LineOfSight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkTimer -= Time.deltaTime;
-        if (checkTimer < 0)
+        checkTimer += Time.deltaTime;
+        if (checkTimer > checkInterval)
         {
-            checkTimer += checkInterval;
             Check();
+            checkTimer = 0;
+            
         }
     }
 
@@ -70,7 +71,6 @@ public class LineOfSight : MonoBehaviour
         {
             return false;
         }
-
         return true;
 
 
@@ -194,5 +194,6 @@ public class LineOfSight : MonoBehaviour
             
         }
     }
+    
     
 }

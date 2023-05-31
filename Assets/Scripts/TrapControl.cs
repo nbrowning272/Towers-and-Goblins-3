@@ -22,6 +22,7 @@ public class TrapControl : MonoBehaviour
         {
             trapBar.UpdateTrapBar(45, trapTimer);
         }
+        else level1 = true;
         
     }
 
@@ -88,7 +89,7 @@ public class TrapControl : MonoBehaviour
     }
     public void TrapMaintenance()
     {
-        if (trapTimer <= 0)
+        if (trapTimer <= 0 && gameObject.tag != "Tower")
         {
             Destroy(gameObject);
         }

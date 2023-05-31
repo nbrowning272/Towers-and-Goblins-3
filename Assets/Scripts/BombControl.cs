@@ -8,6 +8,9 @@ public class BombControl : MonoBehaviour
     GameObject goblinObject;
     Goblin goblin;
     GameObject bomb;
+
+
+
     // Start is called before the first frame update
     void Start()
     {

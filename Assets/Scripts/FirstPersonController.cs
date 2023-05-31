@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -77,6 +79,7 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 		public GameObject player;
+		public GameObject arms;
 
 		private const float _threshold = 0.01f;
 
@@ -99,6 +102,7 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+			animator = arms.GetComponentInChildren<Animator>();
 		}
 
 		private void Start()
@@ -123,6 +127,12 @@ namespace StarterAssets
 				JumpAndGravity();
 				GroundedCheck();
 				Move();
+				if (Input.GetMouseButtonDown(0))
+				{ Attack();
+				
+				}
+
+				SetAnimations();	
 			}
 		}
 
@@ -300,5 +310,131 @@ namespace StarterAssets
 			}
 
 		}
-    }
+		// ---------- //
+		// ANIMATIONS //
+		// ---------- //
+
+		public const string IDLE = "Idle";
+		public const string WALK = "Walk";
+		public const string ATTACK1 = "Attack 1";
+		public const string ATTACK2 = "Attack 2";
+
+
+		string currentAnimationState;
+
+		public void ChangeAnimationState(string newState)
+		{
+			// STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
+			if (currentAnimationState == newState) return;
+
+			// PLAY THE ANIMATION //
+			currentAnimationState = newState;
+			animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+		}
+
+		void SetAnimations()
+		{
+			// If player is not attacking
+			if (!attacking)
+			{
+				if (_controller.velocity.x == 0 && _controller.velocity.z == 0)
+				{ ChangeAnimationState(IDLE); }
+				else
+				{ ChangeAnimationState(WALK); }
+			}
+		}
+
+		// ------------------- //
+		// ATTACKING BEHAVIOUR //
+		// ------------------- //
+
+		[Header("Attacking")]
+		public float attackDistance = 2.5f;
+		public float attackDelay = 0.4f;
+		public float attackSpeed = 1f;
+		public int attackDamage = 1;
+		public LayerMask attackLayer;
+
+		public GameObject hitEffect;
+		public AudioClip swordSwing;
+		public AudioClip hitSound;
+		Animator animator;
+		public Upgrade upgrade;
+
+		public bool attacking = false;
+		bool readyToAttack = true;
+		public int attackCount;
+		public bool isAttacking;
+
+		public void Attack()
+		{
+			if (!readyToAttack || attacking) return;
+
+			readyToAttack = false;
+			attacking = true;
+			isAttacking = true;
+
+			Invoke(nameof(ResetAttack), attackSpeed);
+			Invoke(nameof(AttackRaycast), attackDelay);
+
+
+			if (attackCount == 0)
+			{
+				ChangeAnimationState(ATTACK1);
+				attackCount++;
+			}
+			else
+			{
+				ChangeAnimationState(ATTACK2);
+				attackCount = 0;
+			}
+			
+		}
+
+		void ResetAttack()
+		{
+			attacking = false;
+			readyToAttack = true;
+		}
+
+
+		public void AttackRaycast()
+		{
+			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+			{
+				//HitTarget(hit.point);
+				if (hit.collider.gameObject.tag == "Goblin")
+                {
+					Goblin goblin = hit.collider.gameObject.GetComponent<Goblin>();
+					if (isAttacking == true)
+                    {
+						goblin.health -= upgrade.swordDamage;
+					}		
+                }
+				isAttacking = false;
+			}
+		}
+
+		public GameObject GoblinChecker()
+        {
+			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+			{
+				if (hit.collider.gameObject.tag == "Goblin")
+				{
+					Goblin goblin = hit.collider.gameObject.GetComponent<Goblin>();
+				}
+				return hit.collider.gameObject;
+			}
+			else return null;
+		}
+
+		void HitTarget(Vector3 pos)
+		{
+			//audioSource.pitch = 1;
+			//audioSource.PlayOneShot(hitSound);
+
+			GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
+			Destroy(GO, 20);
+		}
+	}
 }
