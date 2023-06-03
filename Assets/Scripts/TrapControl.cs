@@ -36,6 +36,7 @@ public class TrapControl : MonoBehaviour
         }
         TrapMaintenance();
         targetGoblin = FindClosestGoblin().transform;
+        Vector3 targetGoblinOffset = new Vector3(targetGoblin.position.x - 0.2f, targetGoblin.position.y + 0.5f, targetGoblin.position.z - 0.2f);
         if (level1)
         {
             targetGoblin = null;
@@ -44,7 +45,7 @@ public class TrapControl : MonoBehaviour
             distance = Vector3.Distance(targetGoblin.position, transform.position);
             if (distance <= maxDistance)
             {
-                orb.LookAt(targetGoblin);
+                orb.LookAt(targetGoblinOffset);
                 if (Time.time >= nextFire)
                 {
                     nextFire = Time.time + 1f / fireRate;
@@ -58,7 +59,7 @@ public class TrapControl : MonoBehaviour
     void Shoot()
     {
         GameObject clone = Instantiate(bulletPrefab, shootPoint.position, orb.rotation);
-        clone.GetComponent<Rigidbody>().AddForce(orb.transform.forward * 5000);
+        clone.GetComponent<Rigidbody>().AddForce(orb.transform.forward * 20000);
         Destroy(clone, 2);
         Debug.Log(trapTimer);
     }

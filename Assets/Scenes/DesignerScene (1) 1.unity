@@ -7056,6 +7056,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -97.161
       objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.84651315
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.02092061
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.049838476
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5296168
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -5.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -3.581
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561378474331250429, guid: 237b685626503c74fb4b9e8fd9a7fb41,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -63.906
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 237b685626503c74fb4b9e8fd9a7fb41, type: 3}
 --- !u!1 &177394897
@@ -31622,7 +31657,9 @@ MonoBehaviour:
   towerLevel: 1
   towerCost: 0
   towerCostText: 
-  towerObject: {fileID: 2074540225}
+  towerObject1: {fileID: 0}
+  towerObject2: {fileID: 0}
+  towerObject3: {fileID: 0}
   towerControl: {fileID: 2074540228}
   lightningTrapCost: 15
   rangedTrapCost: 20
@@ -39223,26 +39260,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175519389}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1175597825 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1571156417649846402, guid: 237b685626503c74fb4b9e8fd9a7fb41,
-    type: 3}
-  m_PrefabInstance: {fileID: 172207116}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1175597829
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175597825}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5535028233509875347, guid: 4f22b430aadf41e4e94e44cd79d40386, type: 3}
 --- !u!1 &1176450150
 GameObject:
   m_ObjectHideFlags: 0

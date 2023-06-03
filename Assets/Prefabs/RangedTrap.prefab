@@ -156,7 +156,7 @@ MonoBehaviour:
   shootPoint: {fileID: 569048081575641540}
   bulletPrefab: {fileID: 1720796602168066497, guid: b1007e9ee77a7a14c8ad1a02cc9b2606,
     type: 3}
-  fireRate: 0.1
+  fireRate: 0.2
   nextFire: 0
   level1: 0
   trapTimer: 45
@@ -389,7 +389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3870250599882099267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0104}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 2591791440918871228}
   - component: {fileID: 6951031328654852271}
   - component: {fileID: 6601965266033752148}
+  - component: {fileID: 7706100921210513938}
   m_Layer: 0
   m_Name: disc1
   m_TagString: Untagged
@@ -489,10 +490,24 @@ BoxCollider:
   m_GameObject: {fileID: 4435287127137933394}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.09784789, y: 0.006104618, z: 0.097847894}
   m_Center: {x: 0, y: 0.0019602922, z: -0.0000000059604646}
+--- !u!64 &7706100921210513938
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4435287127137933394}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8111404716075578665, guid: 8a66e5ab421dac84ea848c4d426f4ea0, type: 3}
 --- !u!1 &5429846356444034535
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +694,7 @@ GameObject:
   - component: {fileID: 5983079582970315331}
   - component: {fileID: 5248702846029155661}
   - component: {fileID: 3422876911656453814}
+  - component: {fileID: 7654420626976561403}
   m_Layer: 0
   m_Name: sphere_ring
   m_TagString: Untagged
@@ -751,6 +767,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7654420626976561403
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633869096927360247}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4207820950815050224, guid: 8a66e5ab421dac84ea848c4d426f4ea0, type: 3}
 --- !u!1 &6627351657687201208
 GameObject:
   m_ObjectHideFlags: 0

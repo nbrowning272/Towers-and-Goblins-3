@@ -336,6 +336,8 @@ MonoBehaviour:
   red: 0
   boss: 0
   goblinColour: green
+  attackTimer: 1.2
+  attackInterval: 1.617
   goblinDamage: 1
 --- !u!54 &-3531559950754652859
 Rigidbody:
@@ -365,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e893410ea5d7a2a46b1f2d1a1891fff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 6
+  distance: 4
   angle: 90
   height: 3
   meshColor: {r: 1, g: 0, b: 0, a: 1}

@@ -41,7 +41,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText = "Health: " + player.health;
+        healthText = "Health: " + player.GetComponent<Player>().health;
         hTextElement.text = healthText;
 
         salvageText = "Salvage: " + gameManager.salvage;

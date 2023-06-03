@@ -12,7 +12,7 @@ public class Goblin : MonoBehaviour
     public Transform playerMovement;
     public float speed = 0.2f;
     public float rotateSpeed = 0.0025f;
-    public float health = 10f;
+    public float health = 3f;
     public float maxHealth;
     private Rigidbody rb;
     public LineOfSight lineOfSight;
@@ -28,8 +28,8 @@ public class Goblin : MonoBehaviour
     float distance;
     float timer = 2.2f;
     float oSpeed;
-    float attackTimer = 0.4f;
-    float attackInterval = 1.11f;
+    public float attackTimer = 0.9f;
+    public float attackInterval = 1.617f;
     public float goblinDamage;
 
     //public TrapControl trapControl;
@@ -67,7 +67,9 @@ public class Goblin : MonoBehaviour
         {
             player = GetPlayer();
         }
-        
+
+        //Debug.Log(player.GetComponent<Player>().health);
+
         controller = GameObject.Find("PlayerCapsule").GetComponent<FirstPersonController>();
         SetAnimations();
         if (health <= 0)
@@ -84,7 +86,7 @@ public class Goblin : MonoBehaviour
         if (!wall && !player)
             GetWall();
         // Rotate towards target
-        else if (wall && !player)
+        else if (wall && player == null)
             AttackWall();
         else
         {
@@ -113,7 +115,7 @@ public class Goblin : MonoBehaviour
             return lineOfSight.Objects[0];
         }
         //player = GameObject.FindGameObjectWithTag("Player");
-        else return null;
+        return null;
 
     }
 
@@ -126,7 +128,7 @@ public class Goblin : MonoBehaviour
     }
     private void RotateTowardsPlayer()
     {
-        Vector3 playerOffset = new Vector3(player.transform.position.x, player.transform.position.y - 0.75f, player.transform.position.z);
+        Vector3 playerOffset = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Quaternion playerDirection = Quaternion.LookRotation(playerOffset - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, playerDirection, 0.2f);
     }
@@ -138,13 +140,13 @@ public class Goblin : MonoBehaviour
         {
             if (!red && !boss)
             {
-                Debug.Log(gameManager.wallHealth);
+                //Debug.Log(gameManager.wallHealth);
                 gameManager.wallHealth--;
                 Destroy(gameObject);
             }
             else if (red)
             {
-                Debug.Log(gameManager.wallHealth);
+                //Debug.Log(gameManager.wallHealth);
                 gameManager.wallHealth-= 3;
                 Destroy(gameObject);
             }
@@ -243,8 +245,8 @@ public class Goblin : MonoBehaviour
                     {
                         Debug.Log("done 2");
                         speed = 0;
+                        GoblinAttack();
                         ChangeAnimationState(BLUEATTACK);
-                        playerScript.health--;
                     }
                     else if (health <= 0)
                     {
@@ -263,8 +265,8 @@ public class Goblin : MonoBehaviour
                     if (distance < 1.7 && health > 0)
                     {
                         speed = 0;
+                        GoblinAttack();
                         ChangeAnimationState(BLUEATTACK);
-                        playerScript.health--;
                     }
                     else if (health <= 0)
                     {
@@ -311,8 +313,8 @@ public class Goblin : MonoBehaviour
                     {
                         Debug.Log("done 2");
                         speed = 0;
+                        GoblinAttack();
                         ChangeAnimationState(GREENATTACK);
-                        playerScript.health--;
                     }
                     else if (health <= 0)
                     {
@@ -331,8 +333,8 @@ public class Goblin : MonoBehaviour
                     if (distance < 1.7 && health > 0)
                     {
                         speed = 0;
+                        GoblinAttack();
                         ChangeAnimationState(GREENATTACK);
-                        playerScript.health--;
                     }
                     else if (health <= 0)
                     {
@@ -379,7 +381,7 @@ public class Goblin : MonoBehaviour
                     {
                         Debug.Log("done 2");
                         speed = 0;
-                        StartCoroutine(GoblinAttack()); ;
+                        GoblinAttack();
                         ChangeAnimationState(REDATTACK);
                         
                         //playerScript.health--;
@@ -401,7 +403,7 @@ public class Goblin : MonoBehaviour
                     if (distance < 1.7 && health > 0)
                     {
                         speed = 0;
-                        StartCoroutine(GoblinAttack());
+                        GoblinAttack();
                         ChangeAnimationState(REDATTACK);
                         
                     }
@@ -434,13 +436,16 @@ public class Goblin : MonoBehaviour
         }
         
     }
-    IEnumerator GoblinAttack()
+    public void GoblinAttack()
     {
-        playerScript = player.GetComponent<Player>();
-        Debug.Log("idk");
-        yield return new WaitForSeconds(0.8f);
-        playerScript.health -= goblinDamage;
-        Debug.Log(goblinDamage);
-        yield return new WaitForSeconds(0.3f);
+        if (attackTimer < attackInterval)
+        {
+            attackTimer += Time.deltaTime;
+        }
+        else
+        {
+            player.GetComponent<Player>().health -= goblinDamage;
+            attackTimer = 0;
+        }
     }
 }

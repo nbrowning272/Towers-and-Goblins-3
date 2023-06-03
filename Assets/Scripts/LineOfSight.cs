@@ -81,12 +81,14 @@ public class LineOfSight : MonoBehaviour
     {
         count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, layers, QueryTriggerInteraction.Collide);
         objects.Clear();
-        for (int i = 0; i < count; i++)
+        //Debug.Log(objects.Count);
+        for (int i = 0; i < count; ++i)
         {
             GameObject obj = colliders[i].gameObject;
             if (IsInSight(obj))
             {
                 objects.Add(obj);
+                Debug.Log(Objects.Count);   
             }
         }
     }
