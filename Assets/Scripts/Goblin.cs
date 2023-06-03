@@ -200,6 +200,7 @@ public class Goblin : MonoBehaviour
     [Header("Boss Animations")]
     public const string BOSSWALK = "bossWalk";
     public const string BOSSDAMAGE = "bossDamage";
+    public const string BOSSATTACK = "bossAttack";
     public const string BOSSDEATH = "bossDeath";
 
     string currentAnimationState;
@@ -432,6 +433,73 @@ public class Goblin : MonoBehaviour
                 }
 
 
+            }
+
+            else if (goblinColour == "boss")
+            {
+                if (controller.GoblinChecker() == gameObject)
+                {
+                    Debug.Log("found");
+                    if (controller.attacking && controller.attackCount == 0 && health > 1)
+                    {
+                        speed = 0;
+                        ChangeAnimationState(BOSSDAMAGE);
+                    }
+                    else if (controller.attacking && controller.attackCount == 1 && health > 1)
+                    {
+                        speed = 0;
+                        ChangeAnimationState(BOSSDAMAGE);
+                    }
+                    else if (distance < 1.7 && !controller.attacking && health > 0 && player)
+                    {
+                        Debug.Log("done 2");
+                        speed = 0;
+                        GoblinAttack();
+                        ChangeAnimationState(BOSSATTACK);
+                    }
+                    else if (health <= 0)
+                    {
+                        speed = 0;
+                        ChangeAnimationState(BOSSDEATH);
+
+                    }
+                    else
+                    {
+                        speed = oSpeed;
+                        ChangeAnimationState(BOSSWALK);
+                    }
+                }
+                else if (controller.GoblinChecker() != gameObject && player)
+                {
+                    if (distance < 1.7 && health > 0)
+                    {
+                        speed = 0;
+                        GoblinAttack();
+                        ChangeAnimationState(BOSSATTACK);
+                    }
+                    else if (health <= 0)
+                    {
+                        speed = 0;
+                        ChangeAnimationState(BOSSDEATH);
+
+                    }
+                    else
+                    {
+                        speed = oSpeed;
+                        ChangeAnimationState(BOSSWALK);
+                    }
+                }
+                else if (health <= 0)
+                {
+                    speed = 0;
+                    ChangeAnimationState(BOSSDEATH);
+
+                }
+                else
+                {
+                    speed = oSpeed;
+                    ChangeAnimationState(BOSSWALK);
+                }
             }
         }
         

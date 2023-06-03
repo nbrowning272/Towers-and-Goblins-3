@@ -28,6 +28,7 @@ TagManager:
   - Bomb Trap
   - Ghost Bomb Trap
   - BuyBomb
+  - Heal
   layers:
   - Default
   - TransparentFX
