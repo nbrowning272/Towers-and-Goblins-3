@@ -324,7 +324,7 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   speed: 2
   rotateSpeed: 0.0025
-  health: 6
+  health: 5
   maxHealth: 5
   lineOfSight: {fileID: 0}
   goblinHealthBar: {fileID: 5439592145376913954}
@@ -336,6 +336,7 @@ MonoBehaviour:
   red: 0
   boss: 0
   goblinColour: blue
+  goblinDamage: 2
 --- !u!114 &8780105961314887522
 MonoBehaviour:
   m_ObjectHideFlags: 0
