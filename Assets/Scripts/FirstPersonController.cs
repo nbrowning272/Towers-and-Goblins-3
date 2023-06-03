@@ -310,11 +310,34 @@ namespace StarterAssets
 			}
 
 		}
-		// ---------- //
-		// ANIMATIONS //
-		// ---------- //
 
-		public const string IDLE = "Idle";
+		private float healTimer = 0;
+		private float healInterval = 3;
+        private void OnTriggerStay(Collider other)
+        {
+			if (other.gameObject.tag == "Heal")
+            {
+				if (healTimer < healInterval)
+				{
+					healTimer += Time.deltaTime;
+				}
+				else if (healTimer > healInterval && player.GetComponent<Player>().health < 10)
+				{
+					player.GetComponent<Player>().health++;
+					healTimer = 0;
+				}
+				else
+                {
+					healTimer = 0;
+                }
+
+            }
+        }
+        // ---------- //
+        // ANIMATIONS //
+        // ---------- //
+
+        public const string IDLE = "Idle";
 		public const string WALK = "Walk";
 		public const string ATTACK1 = "Attack 1";
 		public const string ATTACK2 = "Attack 2";
@@ -360,6 +383,7 @@ namespace StarterAssets
 		public AudioClip hitSound;
 		Animator animator;
 		public Upgrade upgrade;
+		public AudioSource audioSource;
 
 		public bool attacking = false;
 		bool readyToAttack = true;
@@ -376,6 +400,7 @@ namespace StarterAssets
 
 			Invoke(nameof(ResetAttack), attackSpeed);
 			Invoke(nameof(AttackRaycast), attackDelay);
+			audioSource.PlayOneShot(swordSwing);
 
 
 			if (attackCount == 0)
@@ -430,8 +455,8 @@ namespace StarterAssets
 
 		void HitTarget(Vector3 pos)
 		{
-			//audioSource.pitch = 1;
-			//audioSource.PlayOneShot(hitSound);
+			audioSource.pitch = 1;
+			audioSource.PlayOneShot(hitSound);
 
 			GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
 			Destroy(GO, 20);

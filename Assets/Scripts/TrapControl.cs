@@ -59,7 +59,7 @@ public class TrapControl : MonoBehaviour
     void Shoot()
     {
         GameObject clone = Instantiate(bulletPrefab, shootPoint.position, orb.rotation);
-        clone.GetComponent<Rigidbody>().AddForce(orb.transform.forward * 20000);
+        clone.GetComponent<Rigidbody>().AddForce(orb.transform.forward * 10000);
         Destroy(clone, 2);
         Debug.Log(trapTimer);
     }
