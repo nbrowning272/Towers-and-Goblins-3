@@ -15,17 +15,28 @@ public class Upgrade : MonoBehaviour
     public float swordCost;
     public string swordCostText;
     public float swordDamage = 1;
+    public GameObject Sword1;
+    public GameObject Sword2;
+    public GameObject Sword3;
 
     [Header("Wall")]
     public int wallLevel = 1;
     public float wallCost;
     public string wallCostText;
+    public GameObject wallObject1;
+    public GameObject wallObject2;
+    public GameObject wallObject3;
+    public GameObject core1;
+    public GameObject core2;
+    public GameObject core3;
 
     [Header("Tower")]
     public int towerLevel = 1;
     public float towerCost;
     public string towerCostText;
-    public GameObject towerObject;
+    public GameObject towerObject1;
+    public GameObject towerObject2;
+    public GameObject towerObject3;
     public TrapControl towerControl;
 
 
@@ -49,16 +60,13 @@ public class Upgrade : MonoBehaviour
         placeObject = GetComponent<PlaceObject>();
         rangedTrap = GetComponent<RangedTrap>();
         bombTrap = GetComponent<BombTrap>();
-        towerControl = towerObject.GetComponent<TrapControl>();
+        towerControl = towerObject1.GetComponent<TrapControl>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
-        
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 5f))
         {
@@ -132,7 +140,7 @@ public class Upgrade : MonoBehaviour
             if (hit.collider.gameObject.tag == "WallStation")
             {
                 WallCost();
-                hud.interactText = "E - Upgrade Wall - " + wallCost + " Salvage";
+                hud.interactText = "E - Upgrade Wall - " + wallCostText;
                 if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= wallCost)
                 {
                     gameManager.salvage -= wallCost;
@@ -148,12 +156,15 @@ public class Upgrade : MonoBehaviour
             if (hit.collider.gameObject.tag == "Tower")
             {
                 TowerCost();
-                hud.interactText = "E - Upgrade Tower - " + towerCost + " Salvage";
-                if (Input.GetKeyDown(KeyCode.Y) && gameManager.salvage >= towerCost)
+                hud.interactText = "E - Upgrade Tower - " + towerCostText;
+                if (Input.GetKeyDown(KeyCode.E) && gameManager.salvage >= towerCost)
                 {
                     gameManager.salvage -= towerCost;
-                    towerControl.fireRate += 0.25f;
                     towerLevel++;
+                    TowerCost();
+                    towerControl.fireRate += 0.25f;
+                    
+                    
                 }
             }
 
@@ -197,12 +208,16 @@ public class Upgrade : MonoBehaviour
         }
         if (swordLevel == 2)
         {
+            Sword1.SetActive(false);
+            Sword2.SetActive(true);
             swordCostText = "50 Salvage";
             swordCost = 50;
             swordDamage = 2;
         }
         if (swordLevel == 3)
         {
+            Sword2.SetActive(false);
+            Sword3.SetActive(true);
             swordCostText = "Maxed Out";
             swordCost = 1000;
             swordDamage = 3;
@@ -214,14 +229,23 @@ public class Upgrade : MonoBehaviour
         {
             wallCostText = "25 Salvage";
             wallCost = 25;
+            
         }
         if(wallLevel == 2)
         {
+            wallObject1.SetActive(false);
+            wallObject2.SetActive(true);
+            core1.SetActive(false);
+            core2.SetActive(true);
             wallCostText = "30 Salvage";
             wallCost = 30;
         }
         if (wallLevel == 3)
         {
+            wallObject2.SetActive(false);
+            wallObject3.SetActive(true);
+            core2.SetActive(false);
+            core3.SetActive(true);
             wallCostText = "Maxed Out";
             wallCost = 1000;
         }
@@ -236,20 +260,23 @@ public class Upgrade : MonoBehaviour
         }
         if (towerLevel == 2)
         {
+            towerObject1.SetActive(false);
+            towerObject2.SetActive(true);
+            towerControl = towerObject2.GetComponent<TrapControl>();
             towerControl.level1 = false;
             towerCostText = "50 Salvage";
             towerCost = 50;
         }
         if (towerLevel == 3)
         {
-            towerCostText = "50 Salvage";
-            towerCost = 50;
-        }
-        if (towerLevel == 4)
-        {
+            towerControl.level1 = false;
+            towerObject2.SetActive(false);
+            towerObject3.SetActive(true);
+            towerControl = towerObject3.GetComponent<TrapControl>();
             towerCostText = "Maxed Out";
             towerCost = 1000;
         }
+
     }
     public void TrapMaintenanceCost()
     {
